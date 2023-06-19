@@ -1,0 +1,35 @@
+{
+  "people": [
+    {
+      "name": "Max Mustermann",
+      "medication": [
+        {
+          "time": "morgens",
+          "details": "Rampiril"
+        },
+        {
+          "time": "mittags",
+          "details": "Amlodipin"
+        }
+      ]
+    },
+    {
+      "name": "John Doe",
+      "medication": [
+        {
+          "time": "abends",
+          "details": "Simvastatin"
+        }
+      ]
+    },
+    {
+      "name": "Pia Müller",
+      "medication": [
+        {
+          "time": "mittags",
+          "details": "Bisoprolol"
+        }
+      ]
+    }
+  ]
+}

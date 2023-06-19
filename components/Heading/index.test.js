@@ -1,8 +1,11 @@
-import Heading from ".";
+import React from "react";
 import { render, screen } from "@testing-library/react";
+import HomePage from "../../pages/index";
 
-test("test", () => {
-  render(<Heading>🐬</Heading>);
-  const element = screen.getByText("🐬");
-  expect(element).toBeInTheDocument();
+describe("Homepage", () => {
+  it("renders the title", () => {
+    render(<HomePage />);
+    const titleElement = screen.getByText("MediCheck");
+    expect(titleElement).toBeInTheDocument();
+  });
 });

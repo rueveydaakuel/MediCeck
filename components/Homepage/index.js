@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Navigation from "../Navigation/index.js";
 
 export default function Homepage() {
   const [name, setName] = useState("");
@@ -38,6 +39,9 @@ export default function Homepage() {
           Weiter
         </button>
       </main>
+      <footer>
+        <Navigation />
+      </footer>
     </div>
   );
 }

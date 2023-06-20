@@ -10,9 +10,9 @@ export default function Navigation() {
     <Nav>
       <ul>
         <Li>
-          <a href="/">
+          <Link href="/">
             <Image src={icon} alt="Icon" width={40} height={40} />
-          </a>
+          </Link>
         </Li>
       </ul>
     </Nav>

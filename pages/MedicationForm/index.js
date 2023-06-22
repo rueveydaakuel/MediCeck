@@ -5,6 +5,7 @@ function FormComponent() {
   const [selectedMedication, setSelectedMedication] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [medicationName, setMedicationName] = useState("");
+  const [saveData, setSaveData] = useState([]);
 
   const handleMedicationSelection = (index) => {
     setSelectedMedication(index);
@@ -21,25 +22,47 @@ function FormComponent() {
     setMedicationName(event.target.value);
   };
 
+  const handleSave = () => {
+    if (
+      selectedMedication === null ||
+      selectedTime === null ||
+      medicationName === ""
+    ) {
+      return;
+    }
+
+    const newData = {
+      medication: selectedMedication,
+      time: selectedTime,
+      name: medicationName,
+    };
+
+    setSaveData([...saveData, newData]);
+    setSelectedMedication(null);
+    setSelectedTime(null);
+    setMedicationName("");
+  };
+
+  const weekdays = ["Mo", "Die", "Mi", "Do", "Fr", "Sa", "So"];
+  const timesOfDay = ["morgens", "mittags", "abends"];
+
   return (
     <div>
       <h2>Wann wird das Medikament eingenommen?</h2>
       <Container>
-        {["Mo", "Die", "Mi", "Do", "Fr", "Sa", "So"].map(
-          (medication, index) => (
-            <Box
-              key={index}
-              selected={selectedMedication === index}
-              onClick={() => handleMedicationSelection(index)}
-            >
-              {medication}
-            </Box>
-          )
-        )}
+        {weekdays.map((medication, index) => (
+          <Box
+            key={index}
+            selected={selectedMedication === index}
+            onClick={() => handleMedicationSelection(index)}
+          >
+            {medication}
+          </Box>
+        ))}
       </Container>
       <h2>Zu welcher Tageszeit?</h2>
       <Container>
-        {["morgens", "mittags", "abends"].map((time, index) => (
+        {timesOfDay.map((time, index) => (
           <Box
             key={index}
             selected={selectedTime === index}
@@ -55,6 +78,14 @@ function FormComponent() {
         value={medicationName}
         onChange={handleMedicationNameChange}
       />
+      <button onClick={handleSave}>Speichern</button>
+      {saveData.map((data, index) => (
+        <card key={index}>
+          <div>Tag: {weekdays[data.medication]}</div>
+          <div>Tageszeit: {timesOfDay[data.time]}</div>
+          <div>Medikament: {data.name}</div>
+        </card>
+      ))}
     </div>
   );
 }

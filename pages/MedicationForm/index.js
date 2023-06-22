@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Navigation from "../../components/Navigation/index.js";
 
 function FormComponent() {
   const [selectedMedication, setSelectedMedication] = useState(null);
@@ -88,6 +89,7 @@ function FormComponent() {
           <div>Medikament: {data.name}</div>
         </Card>
       ))}
+      <Navigation />
     </div>
   );
 }

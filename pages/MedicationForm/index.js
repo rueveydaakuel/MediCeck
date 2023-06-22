@@ -78,13 +78,15 @@ function FormComponent() {
         value={medicationName}
         onChange={handleMedicationNameChange}
       />
-      <button onClick={handleSave}>Speichern</button>
+      <ButtonContainer>
+        <button onClick={handleSave}>Speichern</button>
+      </ButtonContainer>
       {saveData.map((data, index) => (
-        <card key={index}>
+        <Card key={index}>
           <div>Tag: {weekdays[data.medication]}</div>
           <div>Tageszeit: {timesOfDay[data.time]}</div>
           <div>Medikament: {data.name}</div>
-        </card>
+        </Card>
       ))}
     </div>
   );
@@ -107,4 +109,24 @@ const Container = styled.div`
 const Input = styled.input`
   padding: 10px;
   margin: 5px;
+  width: 50%;
+`;
+
+const Card = styled.div`
+  border: 1px solid black;
+  padding: 10px;
+  margin: 5px;
+  width: 50%;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    color: green;
+    padding: 10px;
+    border: 1px solid green;
+  }
 `;

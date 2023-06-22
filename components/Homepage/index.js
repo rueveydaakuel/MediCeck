@@ -1,10 +1,14 @@
 import { useState } from "react";
 import Navigation from "../Navigation/index.js";
 import styled from "styled-components";
+import { useRouter } from "next/router.js";
+import Link from "next/link";
+import MedicationForm from "../../pages/MedicationForm/index.js";
 
 export default function Homepage() {
   const [name, setName] = useState("");
   const [isButtonDeactivated, setIsButtonDeactivated] = useState(true);
+  const router = useRouter();
 
   const handleNameChange = (event) => {
     const newName = event.target.value;
@@ -18,7 +22,7 @@ export default function Homepage() {
   };
 
   const handleNextButtonClick = () => {
-    console.log(`Medikationsplan wird für ${name} erstellt.`);
+    router.push("/MedicationForm");
   };
 
   return (

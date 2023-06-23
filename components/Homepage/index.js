@@ -22,7 +22,10 @@ export default function Homepage() {
   };
 
   const handleNextButtonClick = () => {
-    router.push("/MedicationForm");
+    router.push({
+      pathname: "/MedicationForm",
+      query: { name: name },
+    });
   };
 
   return (

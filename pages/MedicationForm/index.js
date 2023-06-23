@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/index.js";
+import { useRouter } from "next/router";
 
 function FormComponent() {
   const [selectedMedication, setSelectedMedication] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [medicationName, setMedicationName] = useState("");
   const [saveData, setSaveData] = useState([]);
+  const router = useRouter();
+  const { name } = router.query;
 
   const handleMedicationSelection = (index) => {
     setSelectedMedication(index);
@@ -25,9 +28,10 @@ function FormComponent() {
 
   const handleSave = () => {
     if (
-      selectedMedication === null ||
-      selectedTime === null ||
-      medicationName === ""
+      (selectedMedication === null ||
+        selectedTime === null ||
+        medicationName === "",
+      name === "")
     ) {
       return;
     }
@@ -35,7 +39,8 @@ function FormComponent() {
     const newData = {
       medication: selectedMedication,
       time: selectedTime,
-      name: medicationName,
+      medicationName: medicationName,
+      Person: name,
     };
 
     setSaveData([...saveData, newData]);
@@ -84,9 +89,10 @@ function FormComponent() {
       </ButtonContainer>
       {saveData.map((data, index) => (
         <Card key={index}>
+          <div>Person:{data.Person}</div>
           <div>Tag: {weekdays[data.medication]}</div>
           <div>Tageszeit: {timesOfDay[data.time]}</div>
-          <div>Medikament: {data.name}</div>
+          <div>Medikament: {data.medicationName}</div>
         </Card>
       ))}
       <Navigation />

@@ -4,7 +4,7 @@ import Navigation from "../../components/Navigation/index.js";
 import { useRouter } from "next/router";
 
 function FormComponent() {
-  const [selectedMedication, setSelectedMedication] = useState(null);
+  const [selectedMedication, setSelectedMedication] = useState([]);
   const [selectedTime, setSelectedTime] = useState(null);
   const [medicationName, setMedicationName] = useState("");
   const [saveData, setSaveData] = useState([]);
@@ -12,12 +12,18 @@ function FormComponent() {
   const { name } = router.query;
 
   const handleMedicationSelection = (index) => {
-    setSelectedMedication(index);
-    setSelectedTime(null);
+    if (!selectedMedication) {
+      setSelectedMedication([]);
+    }
+    if (selectedMedication.includes(index)) {
+      setSelectedMedication(selectedMedication.filter((day) => day !== index));
+    } else {
+      setSelectedMedication([...selectedMedication, index]);
+    }
   };
 
   const handleTimeSelection = (index) => {
-    if (selectedMedication !== null) {
+    if (selectedMedication.length > 0) {
       setSelectedTime(index);
     }
   };
@@ -28,7 +34,7 @@ function FormComponent() {
 
   const handleSave = () => {
     if (
-      selectedMedication === null ||
+      selectedMedication.length === 0 ||
       selectedTime === null ||
       medicationName === "" ||
       name === ""
@@ -44,7 +50,7 @@ function FormComponent() {
     };
 
     setSaveData([...saveData, newData]);
-    setSelectedMedication(null);
+    setSelectedMedication([]);
     setSelectedTime(null);
     setMedicationName("");
   };
@@ -59,7 +65,7 @@ function FormComponent() {
         {weekdays.map((medication, index) => (
           <Box
             key={index}
-            selected={selectedMedication === index}
+            selected={selectedMedication.includes(index)}
             onClick={() => handleMedicationSelection(index)}
           >
             {medication}
@@ -89,8 +95,10 @@ function FormComponent() {
       </ButtonContainer>
       {saveData.map((data, index) => (
         <Card key={index}>
-          <div>Person:{data.Person}</div>
-          <div>Tag: {weekdays[data.medication]}</div>
+          <div>Person: {data.Person}</div>
+          <div>
+            Tag: {data.medication.map((day) => weekdays[day]).join(", ")}
+          </div>
           <div>Tageszeit: {timesOfDay[data.time]}</div>
           <div>Medikament: {data.medicationName}</div>
         </Card>

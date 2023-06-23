@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 function FormComponent() {
   const [selectedMedication, setSelectedMedication] = useState([]);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedTime, setSelectedTime] = useState([]);
   const [medicationName, setMedicationName] = useState("");
   const [saveData, setSaveData] = useState([]);
   const router = useRouter();
@@ -23,8 +23,10 @@ function FormComponent() {
   };
 
   const handleTimeSelection = (index) => {
-    if (selectedMedication.length > 0) {
-      setSelectedTime(index);
+    if (selectedTime.includes(index)) {
+      setSelectedTime(selectedTime.filter((time) => time !== index));
+    } else {
+      setSelectedTime([...selectedTime, index]);
     }
   };
 
@@ -35,7 +37,7 @@ function FormComponent() {
   const handleSave = () => {
     if (
       selectedMedication.length === 0 ||
-      selectedTime === null ||
+      selectedTime.length === 0 ||
       medicationName === "" ||
       name === ""
     ) {
@@ -51,7 +53,7 @@ function FormComponent() {
 
     setSaveData([...saveData, newData]);
     setSelectedMedication([]);
-    setSelectedTime(null);
+    setSelectedTime([]);
     setMedicationName("");
   };
 
@@ -77,7 +79,7 @@ function FormComponent() {
         {timesOfDay.map((time, index) => (
           <Box
             key={index}
-            selected={selectedTime === index}
+            selected={selectedTime.includes(index)}
             onClick={() => handleTimeSelection(index)}
           >
             {time}
@@ -99,7 +101,10 @@ function FormComponent() {
           <div>
             Tag: {data.medication.map((day) => weekdays[day]).join(", ")}
           </div>
-          <div>Tageszeit: {timesOfDay[data.time]}</div>
+          <div>
+            Tageszeit: {data.time.map((time) => timesOfDay[time]).join(", ")}
+          </div>
+
           <div>Medikament: {data.medicationName}</div>
         </Card>
       ))}

@@ -28,10 +28,10 @@ function FormComponent() {
 
   const handleSave = () => {
     if (
-      (selectedMedication === null ||
-        selectedTime === null ||
-        medicationName === "",
-      name === "")
+      selectedMedication === null ||
+      selectedTime === null ||
+      medicationName === "" ||
+      name === ""
     ) {
       return;
     }

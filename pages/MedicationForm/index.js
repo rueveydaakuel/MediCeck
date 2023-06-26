@@ -62,36 +62,42 @@ function FormComponent() {
 
   return (
     <div>
-      <h2>Wann wird das Medikament eingenommen?</h2>
-      <Container>
-        {weekdays.map((medication, index) => (
-          <Box
-            key={index}
-            selected={selectedMedication.includes(index)}
-            onClick={() => handleMedicationSelection(index)}
-          >
-            {medication}
-          </Box>
-        ))}
-      </Container>
-      <h2>Zu welcher Tageszeit?</h2>
-      <Container>
-        {timesOfDay.map((time, index) => (
-          <Box
-            key={index}
-            selected={selectedTime.includes(index)}
-            onClick={() => handleTimeSelection(index)}
-          >
-            {time}
-          </Box>
-        ))}
-      </Container>
-      <h2>Wie heißt das Medikament?</h2>
-      <Input
-        type="text"
-        value={medicationName}
-        onChange={handleMedicationNameChange}
-      />
+      <QuestionContainer>
+        <h2>Wann wird das Medikament eingenommen?</h2>
+        <Container>
+          {weekdays.map((medication, index) => (
+            <Box
+              key={index}
+              selected={selectedMedication.includes(index)}
+              onClick={() => handleMedicationSelection(index)}
+            >
+              {medication}
+            </Box>
+          ))}
+        </Container>
+      </QuestionContainer>
+      <QuestionContainer>
+        <h2>Zu welcher Tageszeit?</h2>
+        <Container>
+          {timesOfDay.map((time, index) => (
+            <Box
+              key={index}
+              selected={selectedTime.includes(index)}
+              onClick={() => handleTimeSelection(index)}
+            >
+              {time}
+            </Box>
+          ))}
+        </Container>
+      </QuestionContainer>
+      <QuestionContainer>
+        <h2>Wie heißt das Medikament?</h2>
+        <Input
+          type="text"
+          value={medicationName}
+          onChange={handleMedicationNameChange}
+        />
+      </QuestionContainer>
       <ButtonContainer>
         <button onClick={handleSave}>Speichern</button>
       </ButtonContainer>
@@ -124,7 +130,10 @@ const Box = styled.div`
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 800px;
 `;
 
 const Input = styled.input`
@@ -150,4 +159,8 @@ const ButtonContainer = styled.div`
     padding: 10px;
     border: 1px solid green;
   }
+`;
+
+const QuestionContainer = styled.div`
+  text-align: center;
 `;

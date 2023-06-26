@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/index.js";
 import { useRouter } from "next/router";
@@ -10,6 +10,11 @@ function FormComponent() {
   const [saveData, setSaveData] = useState([]);
   const router = useRouter();
   const { name } = router.query;
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("medicationData")) || [];
+    setSaveData(savedData);
+  }, []);
 
   const handleMedicationSelection = (index) => {
     if (!selectedMedication) {
@@ -51,13 +56,23 @@ function FormComponent() {
       Person: name,
     };
 
-    setSaveData([...saveData, newData]);
+    const savedData = JSON.parse(localStorage.getItem("medicationData")) || [];
+    const updatedData = [...savedData, newData];
+
+    localStorage.setItem("medicationData", JSON.stringify(updatedData));
+
+    setSaveData(updatedData);
     setSelectedMedication([]);
     setSelectedTime([]);
     setMedicationName("");
+
+    router.push({
+      pathname: "/overview",
+      query: { medicationData: JSON.stringify(updatedData) },
+    });
   };
 
-  const weekdays = ["Mo", "Die", "Mi", "Do", "Fr", "Sa", "So"];
+  const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const timesOfDay = ["morgens", "mittags", "abends"];
 
   return (
@@ -101,19 +116,6 @@ function FormComponent() {
       <ButtonContainer>
         <button onClick={handleSave}>Speichern</button>
       </ButtonContainer>
-      {saveData.map((data, index) => (
-        <Card key={index}>
-          <div>Person: {data.Person}</div>
-          <div>
-            Tag: {data.medication.map((day) => weekdays[day]).join(", ")}
-          </div>
-          <div>
-            Tageszeit: {data.time.map((time) => timesOfDay[time]).join(", ")}
-          </div>
-
-          <div>Medikament: {data.medicationName}</div>
-        </Card>
-      ))}
       <Navigation />
     </div>
   );
@@ -137,13 +139,6 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
-  padding: 10px;
-  margin: 5px;
-  width: 50%;
-`;
-
-const Card = styled.div`
-  border: 1px solid black;
   padding: 10px;
   margin: 5px;
   width: 50%;

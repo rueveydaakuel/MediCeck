@@ -15,7 +15,7 @@ export default function Navigation() {
         </IconLeft>
       </Link>
       <Divider />
-      <Link href="/">
+      <Link href="/overview">
         <IconRight>
           <Image src={iconOverview} alt="Icon" width={40} height={40} />
         </IconRight>

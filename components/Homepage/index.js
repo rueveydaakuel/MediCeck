@@ -3,7 +3,6 @@ import Navigation from "../Navigation/index.js";
 import styled from "styled-components";
 import { useRouter } from "next/router.js";
 import Link from "next/link";
-import MedicationForm from "../../pages/MedicationForm/index.js";
 import HeaderContainer from "../Header/index.js";
 
 export default function Homepage() {
@@ -22,7 +21,7 @@ export default function Homepage() {
     }
   };
 
-  const handleNextButtonClick = () => {
+  const handleNextButtonClick = (event) => {
     router.push({
       pathname: "/MedicationForm",
       query: { name: name },

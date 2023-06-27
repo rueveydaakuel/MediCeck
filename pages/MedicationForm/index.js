@@ -81,13 +81,13 @@ function FormComponent() {
         <h2>Wann wird das Medikament eingenommen?</h2>
         <Container>
           {weekdays.map((medication, index) => (
-            <Box
+            <Button
               key={index}
               selected={selectedMedication.includes(index)}
               onClick={() => handleMedicationSelection(index)}
             >
               {medication}
-            </Box>
+            </Button>
           ))}
         </Container>
       </QuestionContainer>
@@ -95,13 +95,13 @@ function FormComponent() {
         <h2>Zu welcher Tageszeit?</h2>
         <Container>
           {timesOfDay.map((time, index) => (
-            <Box
+            <Button
               key={index}
               selected={selectedTime.includes(index)}
               onClick={() => handleTimeSelection(index)}
             >
               {time}
-            </Box>
+            </Button>
           ))}
         </Container>
       </QuestionContainer>
@@ -123,7 +123,7 @@ function FormComponent() {
 
 export default FormComponent;
 
-const Box = styled.div`
+const Button = styled.button`
   background-color: ${(props) => (props.selected ? "lightskyblue" : "silver")};
   color: ${(props) => (props.selected ? "white" : "black")};
   padding: 10px;

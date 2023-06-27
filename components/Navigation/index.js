@@ -3,18 +3,23 @@ import Link from "next/link";
 import styled from "styled-components";
 import Image from "next/image";
 
-import icon from "../../public/home-alt-svgrepo-com.svg";
+import iconHome from "../../public/home-alt-svgrepo-com.svg";
+import iconOverview from "../../public/list-center-svgrepo-com.svg";
 
 export default function Navigation() {
   return (
     <Nav>
-      <ul>
-        <Li>
-          <Link href="/">
-            <Image src={icon} alt="Icon" width={40} height={40} />
-          </Link>
-        </Li>
-      </ul>
+      <Link href="/">
+        <IconLeft>
+          <Image src={iconHome} alt="Icon" width={40} height={40} />
+        </IconLeft>
+      </Link>
+      <Divider />
+      <Link href="/overview">
+        <IconRight>
+          <Image src={iconOverview} alt="Icon" width={40} height={40} />
+        </IconRight>
+      </Link>
     </Nav>
   );
 }
@@ -24,14 +29,24 @@ const Nav = styled.nav`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 50px;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   background-color: #d3d3d3;
 `;
 
-const Li = styled.li`
-  margin-right: 10px;
-  list-style-type: none;
+const IconLeft = styled.div`
+  margin-right: 50px;
+`;
+
+const IconRight = styled.div`
+  margin-left: 50px;
+`;
+
+const Divider = styled.div`
+  width: 2px;
+  height: 50px;
+  background-color: #000;
+  margin: 0 10px;
 `;

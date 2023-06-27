@@ -3,7 +3,7 @@ import Navigation from "../Navigation/index.js";
 import styled from "styled-components";
 import { useRouter } from "next/router.js";
 import Link from "next/link";
-import MedicationForm from "../../pages/MedicationForm/index.js";
+import HeaderContainer from "../Header/index.js";
 
 export default function Homepage() {
   const [name, setName] = useState("");
@@ -21,7 +21,7 @@ export default function Homepage() {
     }
   };
 
-  const handleNextButtonClick = () => {
+  const handleNextButtonClick = (event) => {
     router.push({
       pathname: "/MedicationForm",
       query: { name: name },
@@ -31,11 +31,7 @@ export default function Homepage() {
   return (
     <MainContainer>
       <div>
-        <HeaderContainer>
-          <header>
-            <h1>MediCheck</h1>
-          </header>
-        </HeaderContainer>
+        <HeaderContainer />
         <main>
           <div className="question">
             <p>Für wen möchtest du einen Medikationsplan erstellen?</p>
@@ -61,13 +57,6 @@ export default function Homepage() {
   );
 }
 
-const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
-
 const Button = styled.button`
   position: fixed;
   bottom: 100px;
@@ -86,8 +75,11 @@ const Button = styled.button`
   }
 `;
 
-const MainContainer = styled.main`
-  padding-bottom: 60px; /* Platz für den Button reservieren */
+const MainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 `;
 
 const Input = styled.input`

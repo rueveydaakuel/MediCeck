@@ -6,7 +6,8 @@ const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: #61acc7;
+  color: white;
   padding: 16px;
   text-align: center;
 `;

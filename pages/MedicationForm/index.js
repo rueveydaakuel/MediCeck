@@ -124,10 +124,15 @@ function FormComponent() {
 export default FormComponent;
 
 const Button = styled.button`
-  background-color: ${(props) => (props.selected ? "lightskyblue" : "silver")};
+  background-color: ${(props) => (props.selected ? "#3A98B9" : "#E8D5C4")};
   color: ${(props) => (props.selected ? "white" : "black")};
   padding: 10px;
   margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 0 0 auto;
+  margin-bottom: 5px;
 `;
 
 const Container = styled.div`
@@ -142,17 +147,23 @@ const Input = styled.input`
   padding: 10px;
   margin: 5px;
   width: 50%;
+  border-radius: 8px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 50px;
 
   button {
-    color: green;
+    background-color: green;
+    color: white;
     padding: 10px;
-    border: 1px solid green;
+    border-radius: 4px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    width: 100px;
   }
 `;
 

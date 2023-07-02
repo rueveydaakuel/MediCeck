@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Navigation from "../../components/Navigation";
 import styled from "styled-components";
 import EditForm from "../editForm";
+import Head from "next/head";
 
 const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 const timesOfDay = ["morgens", "mittags", "abends"];
@@ -36,7 +37,7 @@ export default function Overview() {
 
   return (
     <Container>
-      <h1>Übersicht</h1>
+      <Heading>Übersicht</Heading>
       {data.length > 0 ? (
         data.map((item, index) => (
           <Card key={index}>
@@ -48,16 +49,20 @@ export default function Overview() {
               />
             ) : (
               <>
-                <h2>Person: {item.Person}</h2>
-                <p>
+                <PersonName>Person: {item.Person}</PersonName>
+                <Information>
                   Tag: {item.medication.map((day) => weekdays[day]).join(", ")}
-                </p>
-                <p>
+                </Information>
+                <Information>
                   Tageszeit:
                   {item.time.map((time) => timesOfDay[time]).join(", ")}
-                </p>
-                <p>Medikament: {item.medicationName}</p>
-                <button onClick={() => handleEdit(index)}>Bearbeiten</button>
+                </Information>
+                <Information>Medikament: {item.medicationName}</Information>
+                <EditButton>
+                  <EditButtonText onClick={() => handleEdit(index)}>
+                    Bearbeiten
+                  </EditButtonText>
+                </EditButton>
               </>
             )}
           </Card>
@@ -79,8 +84,48 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  border: 1px solid black;
+  border: 1px solid #e8d5c4;
   padding: 10px;
   margin: 10px;
-  width: 50%;
+  width: 100%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0ece3;
+`;
+const EditButton = styled.button`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+  height: 100%;
+  background-color: #3a98b9;
+  border: none;
+  border-radius: 8px;
+`;
+
+const PersonName = styled.h2`
+  color: #1b6b93;
+  font-family: Arial, sans-serif;
+`;
+
+const Information = styled.p`
+  color: #3a98b9;
+  font-family: Arial, sans-serif;
+`;
+
+const EditButtonText = styled.span`
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px 16px;
+`;
+
+const Heading = styled.h2`
+  font-size: 32px;
+  color: #1d4c5c;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
 `;

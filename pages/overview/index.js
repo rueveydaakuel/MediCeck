@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Navigation from "../../components/Navigation";
 import styled from "styled-components";
 import EditForm from "../editForm";
-import Head from "next/head";
 
 const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 const timesOfDay = ["morgens", "mittags", "abends"];

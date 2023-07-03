@@ -15,8 +15,8 @@ const timesOfDay = ["morgens", "mittags", "abends"];
 export default function EditForm({ item, onSave, onCancel }) {
   const [editedItem, setEditedItem] = useState({
     ...item,
-    medication: Array.isArray(item.medication) ? item.medication : [],
-    time: Array.isArray(item.time) ? item.time : [],
+    medication: Array.isArray(item?.medication) ? item.medication : [],
+    time: Array.isArray(item?.time) ? item.time : [],
     medicationName: item && item.medicationName ? item.medicationName : "",
   });
 

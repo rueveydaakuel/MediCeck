@@ -58,7 +58,7 @@ export default function EditForm({ item, onSave, onCancel }) {
           type="text"
           id="person"
           name="person"
-          value={editedItem.Person}
+          value={editedItem.person}
           onChange={handleInputChange}
         />
       </FormGroup>

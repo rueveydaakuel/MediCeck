@@ -69,7 +69,9 @@ export default function EditForm({ item, onSave, onCancel }) {
           {weekdays.map((weekday, index) => (
             <Button
               key={index}
-              selected={editedItem.medication.includes(index)}
+              selected={
+                editedItem.medication && editedItem.medication.includes(index)
+              }
               onClick={() => handleSelection("medication", index)}
               type="button"
               aria-label={`Wochentag: ${weekday}`}
@@ -85,7 +87,7 @@ export default function EditForm({ item, onSave, onCancel }) {
           {timesOfDay.map((time, index) => (
             <Button
               key={index}
-              selected={editedItem.time.includes(index)}
+              selected={editedItem.time && editedItem.time.includes(index)}
               onClick={() => handleSelection("time", index)}
               type="button"
               aria-label={`Tageszeit: ${time}`}

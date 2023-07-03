@@ -17,6 +17,7 @@ export default function EditForm({ item, onSave, onCancel }) {
     ...item,
     medication: Array.isArray(item.medication) ? item.medication : [],
     time: Array.isArray(item.time) ? item.time : [],
+    medicationName: item && item.medicationName ? item.medicationName : "",
   });
 
   const handleInputChange = (e) => {
@@ -57,8 +58,8 @@ export default function EditForm({ item, onSave, onCancel }) {
         <Input
           type="text"
           id="person"
-          name="person"
-          value={editedItem.person}
+          name="Person"
+          value={editedItem.Person}
           onChange={handleInputChange}
         />
       </FormGroup>

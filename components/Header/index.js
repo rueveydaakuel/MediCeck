@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Title from "../Title/index";
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -10,10 +11,6 @@ const HeaderContainer = styled.div`
   color: white;
   padding: 16px;
   text-align: center;
-`;
-
-const Title = styled.h1`
-  margin: 0;
 `;
 
 const Header = () => {

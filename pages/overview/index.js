@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Navigation from "../../components/Navigation";
 import styled from "styled-components";
 import EditForm from "../editForm";
+import DeleteCard from "../deleteCard";
 
 const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 const timesOfDay = ["morgens", "mittags", "abends"];
@@ -34,6 +35,18 @@ export default function Overview() {
     localStorage.setItem("medicationData", JSON.stringify(updatedData));
   };
 
+  const handleDelete = (index) => {
+    const confirmDelete = window.confirm(
+      "Sind Sie sicher, dass Sie den Eintrag löschen möchten?"
+    );
+    if (confirmDelete) {
+      const newData = [...data];
+      newData.splice(index, 1);
+      setData(newData);
+      localStorage.setItem("medicationData", JSON.stringify(newData));
+    }
+  };
+
   return (
     <Container>
       <Heading>Übersicht</Heading>
@@ -62,6 +75,7 @@ export default function Overview() {
                     Bearbeiten
                   </EditButtonText>
                 </EditButton>
+                <DeleteCard onDelete={() => handleDelete(index)} />
               </>
             )}
           </Card>

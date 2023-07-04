@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Navigation from "../../components/Navigation";
 import styled from "styled-components";
 import EditForm from "../editForm";
+import DeleteCard from "../deleteCard";
 
 const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 const timesOfDay = ["morgens", "mittags", "abends"];
@@ -34,6 +35,18 @@ export default function Overview() {
     localStorage.setItem("medicationData", JSON.stringify(updatedData));
   };
 
+  const handleDelete = (index) => {
+    const confirmDelete = window.confirm(
+      "Sind Sie sicher, dass Sie den Eintrag löschen möchten?"
+    );
+    if (confirmDelete) {
+      const newData = [...data];
+      newData.splice(index, 1);
+      setData(newData);
+      localStorage.setItem("medicationData", JSON.stringify(newData));
+    }
+  };
+
   return (
     <Container>
       <Heading>Übersicht</Heading>
@@ -48,7 +61,7 @@ export default function Overview() {
               />
             ) : (
               <>
-                <PersonName>Person: {item.Person}</PersonName>
+                <PersonName>{item.Person}</PersonName>
                 <Information>
                   Tag: {item.medication.map((day) => weekdays[day]).join(", ")}
                 </Information>
@@ -57,11 +70,14 @@ export default function Overview() {
                   {item.time.map((time) => timesOfDay[time]).join(", ")}
                 </Information>
                 <Information>Medikament: {item.medicationName}</Information>
-                <EditButton>
-                  <EditButtonText onClick={() => handleEdit(index)}>
-                    Bearbeiten
-                  </EditButtonText>
-                </EditButton>
+                <ButtonsContainer>
+                  <EditButton>
+                    <EditButtonText onClick={() => handleEdit(index)}>
+                      Bearbeiten
+                    </EditButtonText>
+                  </EditButton>
+                  <DeleteCard onDelete={() => handleDelete(index)} />
+                </ButtonsContainer>
               </>
             )}
           </Card>
@@ -93,15 +109,17 @@ const Card = styled.div`
   align-items: center;
   background-color: #f0ece3;
 `;
+
 const EditButton = styled.button`
   display: flex;
-  justify-content: center;
   margin-top: 20px;
   align-items: center;
   height: 100%;
   background-color: #3a98b9;
   border: none;
   border-radius: 8px;
+  margin-right: 50px;
+  width: 120px;
 `;
 
 const PersonName = styled.h2`
@@ -116,9 +134,9 @@ const Information = styled.p`
 
 const EditButtonText = styled.span`
   color: white;
-  font-weight: bold;
   font-size: 16px;
   padding: 8px 16px;
+  border-radius: 8px;
 `;
 
 const Heading = styled.h2`
@@ -127,4 +145,11 @@ const Heading = styled.h2`
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
 `;

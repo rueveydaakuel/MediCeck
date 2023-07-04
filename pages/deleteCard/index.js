@@ -2,23 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 const DeleteCard = ({ onDelete }) => {
-  const handleDelete = () => {
-    onDelete();
-  };
-
   return (
     <ButtonContainer>
-      <DeleteButtonText onClick={handleDelete}>Löschen</DeleteButtonText>
+      <DeleteButtonText onClick={onDelete}>Löschen</DeleteButtonText>
     </ButtonContainer>
   );
 };
 
 export default DeleteCard;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.button`
   display: flex;
-
   margin-top: 20px;
+  border: none;
 `;
 
 const DeleteButtonText = styled.span`

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/index.js";
 import { useRouter } from "next/router";
+import { CloudinaryContext, Image } from "cloudinary-react";
+import axios from "axios";
 
 function FormComponent() {
   const [selectedMedication, setSelectedMedication] = useState([]);
@@ -10,6 +12,7 @@ function FormComponent() {
   const [saveData, setSaveData] = useState([]);
   const router = useRouter();
   const { name } = router.query;
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("medicationData")) || [];
@@ -72,6 +75,35 @@ function FormComponent() {
     });
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setSelectedImage(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const uploadImageToCloudinary = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "medication_images");
+
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        formData
+      );
+
+      return response.data.secure_url;
+    } catch (error) {
+      console.error("Error uploading image to Cloudinary:", error);
+      return null;
+    }
+  };
+
   const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const timesOfDay = ["morgens", "mittags", "abends"];
 
@@ -112,6 +144,10 @@ function FormComponent() {
           value={medicationName}
           onChange={handleMedicationNameChange}
         />
+      </QuestionContainer>
+      <QuestionContainer>
+        <h2>Füge ein Bild hinzu (optional)</h2>
+        <Input type="file" accept="image/*" onChange={handleImageChange} />
       </QuestionContainer>
       <ButtonContainer>
         <button onClick={handleSave}>Speichern</button>

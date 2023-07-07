@@ -63,10 +63,12 @@ export default function Overview() {
               <>
                 <PersonName>{item.Person}</PersonName>
                 <Information>
-                  Tag: {item.medication.map((day) => weekdays[day]).join(", ")}
+                  Tag:{" "}
+                  {Array.isArray(item.medication) &&
+                    item.medication.map((day) => weekdays[day]).join(", ")}
                 </Information>
                 <Information>
-                  Tageszeit:{" "}
+                  Tageszeit:
                   {item.time.map((time) => timesOfDay[time]).join(", ")}
                 </Information>
                 <Information>Medikament: {item.medicationName}</Information>

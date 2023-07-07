@@ -42,7 +42,7 @@ function FormComponent() {
     setMedicationName(event.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (
       selectedMedication.length === 0 ||
       selectedTime.length === 0 ||
@@ -52,17 +52,26 @@ function FormComponent() {
       return;
     }
 
+    let imageUrl = null;
+
+    if (selectedImage) {
+      imageUrl = await uploadImageToCloudinary(selectedImage);
+    }
+
     const newData = {
       medication: selectedMedication,
       time: selectedTime,
       medicationName: medicationName,
       Person: name,
+      image: imageUrl,
     };
 
     const savedData = JSON.parse(localStorage.getItem("medicationData")) || [];
     const updatedData = [...savedData, newData];
 
-    localStorage.setItem("medicationData", JSON.stringify(updatedData));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("medicationData", JSON.stringify(updatedData));
+    }
 
     setSaveData(updatedData);
     setSelectedMedication([]);

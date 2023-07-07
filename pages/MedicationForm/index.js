@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/index.js";

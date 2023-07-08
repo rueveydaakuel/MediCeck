@@ -50,6 +50,14 @@ export default function EditForm({ item, onSave, onCancel }) {
     onSave(editedItem);
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setEditedItem((prevItem) => ({
+      ...prevItem,
+      image: URL.createObjectURL(file),
+    }));
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Heading>Bearbeiten</Heading>
@@ -111,6 +119,17 @@ export default function EditForm({ item, onSave, onCancel }) {
           value={editedItem.medicationName}
           onChange={handleInputChange}
         />
+      </FormGroup>
+      <FormGroup>
+        <Label htmlFor="image">Bild:</Label>
+        <Input
+          type="file"
+          id="image"
+          name="image"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
+        {editedItem.image && <Image src={editedItem.image} alt="Bild" />}
       </FormGroup>
       <ButtonContainer>
         <SubmitButton type="submit">Speichern</SubmitButton>
@@ -192,3 +211,5 @@ const ButtonContainer = styled.div`
   justify-content: center;
   margin-top: 20px;
 `;
+
+const Image = styled.div``;

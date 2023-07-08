@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/index.js";
@@ -95,24 +93,6 @@ function FormComponent() {
 
     reader.readAsDataURL(file);
   };
-
-  // const uploadImageToCloudinary = async (file) => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("file", file);
-  //     formData.append("upload_preset", "medication_images");
-
-  //     const response = await axios.post(
-  //       `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-  //       formData
-  //     );
-
-  //     return response.data.secure_url;
-  //   } catch (error) {
-  //     console.error("Error uploading image to Cloudinary:", error);
-  //     return null;
-  //   }
-  // };
 
   const uploadImageToCloudinary = async (file) => {
     try {

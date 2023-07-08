@@ -137,7 +137,9 @@ export default function EditForm({ item, onSave, onCancel }) {
           onChange={handleImageChange}
         />
         {editedItem.image && <Image src={editedItem.image} alt="Bild" />}
-        <Button onClick={handleImageRemove}>Bild entfernen</Button>
+        <Button type="button" onClick={handleImageRemove}>
+          Bild entfernen
+        </Button>
       </FormGroup>
       <ButtonContainer>
         <SubmitButton type="submit">Speichern</SubmitButton>

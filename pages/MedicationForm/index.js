@@ -1,7 +1,10 @@
+require("dotenv").config();
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/index.js";
 import { useRouter } from "next/router";
+import { CloudinaryContext, Image } from "cloudinary-react";
 
 function FormComponent() {
   const [selectedMedication, setSelectedMedication] = useState([]);
@@ -10,6 +13,7 @@ function FormComponent() {
   const [saveData, setSaveData] = useState([]);
   const router = useRouter();
   const { name } = router.query;
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("medicationData")) || [];
@@ -39,7 +43,7 @@ function FormComponent() {
     setMedicationName(event.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (
       selectedMedication.length === 0 ||
       selectedTime.length === 0 ||
@@ -49,17 +53,26 @@ function FormComponent() {
       return;
     }
 
+    let imageUrl = null;
+
+    if (selectedImage) {
+      imageUrl = await uploadImageToCloudinary(selectedImage);
+    }
+
     const newData = {
       medication: selectedMedication,
       time: selectedTime,
       medicationName: medicationName,
       Person: name,
+      image: imageUrl,
     };
 
     const savedData = JSON.parse(localStorage.getItem("medicationData")) || [];
     const updatedData = [...savedData, newData];
 
-    localStorage.setItem("medicationData", JSON.stringify(updatedData));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("medicationData", JSON.stringify(updatedData));
+    }
 
     setSaveData(updatedData);
     setSelectedMedication([]);
@@ -70,6 +83,62 @@ function FormComponent() {
       pathname: "/overview",
       query: { medicationData: JSON.stringify(updatedData) },
     });
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setSelectedImage(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  // const uploadImageToCloudinary = async (file) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("file", file);
+  //     formData.append("upload_preset", "medication_images");
+
+  //     const response = await axios.post(
+  //       `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+  //       formData
+  //     );
+
+  //     return response.data.secure_url;
+  //   } catch (error) {
+  //     console.error("Error uploading image to Cloudinary:", error);
+  //     return null;
+  //   }
+  // };
+
+  const uploadImageToCloudinary = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "medication_images");
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/dfvh9qexq/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        return data.secure_url;
+      } else {
+        throw new Error("Fehler beim Hochladen des Bildes zu Cloudinary");
+      }
+    } catch (error) {
+      console.error("Fehler beim Hochladen des Bildes zu Cloudinary:", error);
+      return null;
+    }
   };
 
   const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
@@ -112,6 +181,10 @@ function FormComponent() {
           value={medicationName}
           onChange={handleMedicationNameChange}
         />
+      </QuestionContainer>
+      <QuestionContainer>
+        <h2>Füge ein Bild hinzu (optional)</h2>
+        <Input type="file" accept="image/*" onChange={handleImageChange} />
       </QuestionContainer>
       <ButtonContainer>
         <button onClick={handleSave}>Speichern</button>

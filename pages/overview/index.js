@@ -63,13 +63,17 @@ export default function Overview() {
               <>
                 <PersonName>{item.Person}</PersonName>
                 <Information>
-                  Tag: {item.medication.map((day) => weekdays[day]).join(", ")}
+                  Tag:{" "}
+                  {Array.isArray(item.medication) &&
+                    item.medication.map((day) => weekdays[day]).join(", ")}
                 </Information>
                 <Information>
-                  Tageszeit:{" "}
+                  Tageszeit:
                   {item.time.map((time) => timesOfDay[time]).join(", ")}
                 </Information>
                 <Information>Medikament: {item.medicationName}</Information>
+                {item.image && <Image src={item.image} alt="Bild" />}
+
                 <ButtonsContainer>
                   <EditButton>
                     <EditButtonText onClick={() => handleEdit(index)}>
@@ -152,4 +156,9 @@ const ButtonsContainer = styled.div`
   justify-content: center;
   width: 100%;
   margin-top: 20px;
+`;
+
+const Image = styled.img`
+  max-width: 50%;
+  margin-bottom: 10px;
 `;

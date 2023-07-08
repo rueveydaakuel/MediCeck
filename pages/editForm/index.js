@@ -58,6 +58,13 @@ export default function EditForm({ item, onSave, onCancel }) {
     }));
   };
 
+  const handleImageRemove = () => {
+    setEditedItem((prevItem) => ({
+      ...prevItem,
+      image: null,
+    }));
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Heading>Bearbeiten</Heading>
@@ -130,6 +137,7 @@ export default function EditForm({ item, onSave, onCancel }) {
           onChange={handleImageChange}
         />
         {editedItem.image && <Image src={editedItem.image} alt="Bild" />}
+        <Button onClick={handleImageRemove}>Bild entfernen</Button>
       </FormGroup>
       <ButtonContainer>
         <SubmitButton type="submit">Speichern</SubmitButton>

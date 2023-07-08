@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Navigation from "../../components/Navigation/index.js";
 import { useRouter } from "next/router";
 import { CloudinaryContext, Image } from "cloudinary-react";
-import axios from "axios";
 
 function FormComponent() {
   const [selectedMedication, setSelectedMedication] = useState([]);
@@ -97,20 +96,47 @@ function FormComponent() {
     reader.readAsDataURL(file);
   };
 
+  // const uploadImageToCloudinary = async (file) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("file", file);
+  //     formData.append("upload_preset", "medication_images");
+
+  //     const response = await axios.post(
+  //       `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+  //       formData
+  //     );
+
+  //     return response.data.secure_url;
+  //   } catch (error) {
+  //     console.error("Error uploading image to Cloudinary:", error);
+  //     return null;
+  //   }
+  // };
+
   const uploadImageToCloudinary = async (file) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("upload_preset", "medication_images");
 
-      const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-        formData
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/dfvh9qexq/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
       );
 
-      return response.data.secure_url;
+      const data = await response.json();
+
+      if (response.ok) {
+        return data.secure_url;
+      } else {
+        throw new Error("Fehler beim Hochladen des Bildes zu Cloudinary");
+      }
     } catch (error) {
-      console.error("Error uploading image to Cloudinary:", error);
+      console.error("Fehler beim Hochladen des Bildes zu Cloudinary:", error);
       return null;
     }
   };

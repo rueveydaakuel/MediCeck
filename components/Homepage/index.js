@@ -37,15 +37,17 @@ export default function Homepage() {
           <HomepageIconContainer>
             <HomepageIcon />
           </HomepageIconContainer>
-          <div className="question">
-            <p>Für wen möchtest du einen Medikationsplan erstellen?</p>
-            <Input
-              type="text"
-              placeholder="Name:"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
+          <QuestionContainer>
+            <div className="question">
+              <p>Für wen möchtest du einen Medikationsplan erstellen?</p>
+              <Input
+                type="text"
+                placeholder="Name:"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </div>
+          </QuestionContainer>
           <Button
             disabled={isButtonDeactivated}
             onClick={handleNextButtonClick}
@@ -87,12 +89,18 @@ const MainContainer = styled.div`
 `;
 
 const Input = styled.input`
-  width: 50%;
+  width: 70%;
   padding: 8px;
   font-size: 16px;
 `;
 
 const HomepageIconContainer = styled.div`
-  margin-bottom: 70px;
+  margin-bottom: 20px;
   justify-content: center;
+`;
+
+const QuestionContainer = styled.div`
+  margin-right: 30px;
+  padding: 20px;
+  margin-bottom: 70px;
 `;

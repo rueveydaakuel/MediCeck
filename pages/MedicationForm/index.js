@@ -127,7 +127,7 @@ function FormComponent() {
   return (
     <div>
       <QuestionContainer>
-        <h2>Wann wird das Medikament eingenommen?</h2>
+        <h3>Wann wird das Medikament eingenommen?</h3>
         <Container>
           {weekdays.map((medication, index) => (
             <Button
@@ -141,7 +141,7 @@ function FormComponent() {
         </Container>
       </QuestionContainer>
       <QuestionContainer>
-        <h2>Zu welcher Tageszeit?</h2>
+        <h3>Zu welcher Tageszeit?</h3>
         <Container>
           {timesOfDay.map((time, index) => (
             <Button
@@ -155,7 +155,7 @@ function FormComponent() {
         </Container>
       </QuestionContainer>
       <QuestionContainer>
-        <h2>Wie heißt das Medikament?</h2>
+        <h3>Wie heißt das Medikament?</h3>
         <Input
           type="text"
           value={medicationName}
@@ -163,7 +163,7 @@ function FormComponent() {
         />
       </QuestionContainer>
       <QuestionContainer>
-        <h2>Füge ein Bild hinzu (optional)</h2>
+        <h3>Füge ein Bild hinzu (optional)</h3>
         <Input type="file" accept="image/*" onChange={handleImageChange} />
       </QuestionContainer>
       <ButtonContainer>
@@ -206,7 +206,8 @@ const Input = styled.input`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 20px;
+  padding-bottom: 60px;
 
   button {
     background-color: green;

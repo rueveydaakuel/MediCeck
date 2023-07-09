@@ -20,6 +20,8 @@ export default function EditForm({ item, onSave, onCancel }) {
     medicationName: item && item.medicationName ? item.medicationName : "",
   });
 
+  const [imageStatus, setImageStatus] = useState("");
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -59,6 +61,9 @@ export default function EditForm({ item, onSave, onCancel }) {
   };
 
   const handleImageRemove = () => {
+    if (editedItem.image) {
+      setImageStatus("Bild gelöscht");
+    }
     setEditedItem((prevItem) => ({
       ...prevItem,
       image: null,
@@ -137,9 +142,12 @@ export default function EditForm({ item, onSave, onCancel }) {
           onChange={handleImageChange}
         />
         {editedItem.image ? <Image src={editedItem.image} alt="Bild" /> : null}
-        <Button type="button" onClick={handleImageRemove}>
-          Bild entfernen
-        </Button>
+        {imageStatus && <StatusText>{imageStatus}</StatusText>}
+        {editedItem.image && (
+          <Button type="button" onClick={handleImageRemove}>
+            Bild entfernen
+          </Button>
+        )}
       </FormGroup>
       <ButtonContainer>
         <SubmitButton type="submit">Speichern</SubmitButton>
@@ -223,3 +231,8 @@ const ButtonContainer = styled.div`
 `;
 
 const Image = styled.div``;
+
+const StatusText = styled.p`
+  margin-top: 10px;
+  font-weight: bold;
+`;

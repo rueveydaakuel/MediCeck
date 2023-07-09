@@ -136,7 +136,7 @@ export default function EditForm({ item, onSave, onCancel }) {
           accept="image/*"
           onChange={handleImageChange}
         />
-        {editedItem.image && <Image src={editedItem.image} alt="Bild" />}
+        {editedItem.image ? <Image src={editedItem.image} alt="Bild" /> : null}
         <Button type="button" onClick={handleImageRemove}>
           Bild entfernen
         </Button>

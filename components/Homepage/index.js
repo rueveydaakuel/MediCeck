@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router.js";
 import Link from "next/link";
 import HeaderContainer from "../Header/index.js";
+import HomepageIcon from "../HomepageIcon/index.js";
 
 export default function Homepage() {
   const [name, setName] = useState("");
@@ -33,6 +34,9 @@ export default function Homepage() {
       <div>
         <HeaderContainer />
         <main>
+          <HomepageIconContainer>
+            <HomepageIcon />
+          </HomepageIconContainer>
           <div className="question">
             <p>Für wen möchtest du einen Medikationsplan erstellen?</p>
             <Input
@@ -86,4 +90,9 @@ const Input = styled.input`
   width: 50%;
   padding: 8px;
   font-size: 16px;
+`;
+
+const HomepageIconContainer = styled.div`
+  margin-bottom: 70px;
+  justify-content: center;
 `;

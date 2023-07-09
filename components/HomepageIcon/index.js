@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import MedicinIcon from "../../public/pngwing.com.png";
+import MedicinIcon from "../../public/pngwing1.com.png";
 
 export default function HomepageIcon() {
   return (
@@ -19,6 +19,6 @@ const IconContainer = styled.div`
 `;
 
 const SytledImage = styled(Image)`
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 110px;
 `;

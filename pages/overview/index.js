@@ -63,15 +63,17 @@ export default function Overview() {
               <>
                 <PersonName>{item.Person}</PersonName>
                 <Information>
-                  Tag:{" "}
+                  <ColoredText>Tag: </ColoredText>
                   {Array.isArray(item.medication) &&
                     item.medication.map((day) => weekdays[day]).join(", ")}
                 </Information>
                 <Information>
-                  Tageszeit:
+                  <ColoredText>Tageszeit: </ColoredText>
                   {item.time.map((time) => timesOfDay[time]).join(", ")}
                 </Information>
-                <Information>Medikament: {item.medicationName}</Information>
+                <Information>
+                  <ColoredText>Medikament:</ColoredText> {item.medicationName}
+                </Information>
                 {item.image && <Image src={item.image} alt="Bild" />}
 
                 <ButtonsContainer>
@@ -104,8 +106,8 @@ const Container = styled.div`
 
 const Card = styled.div`
   border: 1px solid #e8d5c4;
-  padding: 10px;
-  margin: 10px;
+  padding: 8px;
+  margin: 8px;
   width: 100%;
   border-radius: 30px;
   display: flex;
@@ -129,11 +131,13 @@ const EditButton = styled.button`
 const PersonName = styled.h2`
   color: #1b6b93;
   font-family: Arial, sans-serif;
+  margin-bottom: 4px;
 `;
 
 const Information = styled.p`
   color: #3a98b9;
   font-family: Arial, sans-serif;
+  margin-bottom: 4px;
 `;
 
 const EditButtonText = styled.span`
@@ -159,6 +163,12 @@ const ButtonsContainer = styled.div`
 `;
 
 const Image = styled.img`
-  max-width: 50%;
-  margin-bottom: 10px;
+  max-width: 70%;
+  margin-bottom: 4px;
+  margin-top: 20px;
+`;
+
+const ColoredText = styled.span`
+  color: #1b6b93;
+  font-weight: bold;
 `;

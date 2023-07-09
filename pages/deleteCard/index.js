@@ -17,7 +17,7 @@ const ButtonContainer = styled.button`
   border: none;
 `;
 
-const DeleteButtonText = styled.span`
+const DeleteButtonText = styled.button`
   color: white;
   font-size: 16px;
   padding: 8px 16px;

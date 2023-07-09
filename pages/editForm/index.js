@@ -171,14 +171,14 @@ const Button = styled.button`
 `;
 
 const Form = styled.form`
-  padding: 20px;
+  padding: 5px;
   background-color: #eeeeee;
 `;
 
 const Heading = styled.h2`
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 const FormGroup = styled.div`
@@ -196,7 +196,7 @@ const Input = styled.input`
   border-radius: 4px;
   width: 100%;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const ButtonGroup = styled.div`
@@ -227,10 +227,11 @@ const CancelButton = styled.button`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 `;
 
-const Image = styled.div``;
+const Image = styled.div`
+  max-width: 100%;
+`;
 
 const StatusText = styled.p`
   margin-top: 10px;

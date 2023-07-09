@@ -75,14 +75,19 @@ export default function Overview() {
                   <ColoredText>Medikament:</ColoredText> {item.medicationName}
                 </Information>
                 {item.image && <Image src={item.image} alt="Bild" />}
-
                 <ButtonsContainer>
                   <EditButton>
-                    <EditButtonText onClick={() => handleEdit(index)}>
+                    <EditButtonText
+                      type="button"
+                      onClick={() => handleEdit(index)}
+                    >
                       Bearbeiten
                     </EditButtonText>
                   </EditButton>
-                  <DeleteCard onDelete={() => handleDelete(index)} />
+                  <DeleteCard
+                    type="button"
+                    onDelete={() => handleDelete(index)}
+                  />
                 </ButtonsContainer>
               </>
             )}

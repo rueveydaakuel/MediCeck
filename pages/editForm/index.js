@@ -169,7 +169,7 @@ const Button = styled.button`
   flex: 0 0 auto;
   margin-bottom: 5px;
 
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     padding: 8px;
     margin-right: 3px;
     font-size: 12px;
@@ -180,7 +180,7 @@ const Form = styled.form`
   padding: 5px;
   background-color: #eeeeee;
 
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     padding: 3px;
   }
 `;
@@ -189,7 +189,7 @@ const Heading = styled.h2`
   font-weight: bold;
   margin-bottom: 15px;
 
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     font-size: 20px;
   }
 `;
@@ -228,7 +228,7 @@ const SubmitButton = styled.button`
   border-radius: 4px;
   margin-right: 10px;
 
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     font-size: 12px;
     padding: 10px 20px;
   }

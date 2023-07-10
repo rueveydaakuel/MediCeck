@@ -110,20 +110,17 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  border: 1px solid #e8d5c4;
-  padding: 8px;
-  margin: 8px;
+  border: 2px solid #e8d5c4;
   width: 100%;
-  border-radius: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f7f1e5;
 
-  @media (max-width: 320px) {
-    padding: 4px;
+  @media (max-width: 375px) {
+    padding: 5px;
     margin: 4px;
-    border-radius: 20px;
+    border-radius: 30px;
   }
 `;
 

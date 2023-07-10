@@ -182,7 +182,7 @@ const Button = styled.button`
   padding: 10px;
   margin: 5px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   flex: 0 0 auto;
   margin-bottom: 5px;

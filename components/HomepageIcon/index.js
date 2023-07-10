@@ -19,6 +19,6 @@ const IconContainer = styled.div`
 `;
 
 const SytledImage = styled(Image)`
-  width: 130px;
-  height: 110px;
+  width: 140px;
+  height: 120px;
 `;

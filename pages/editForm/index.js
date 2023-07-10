@@ -70,6 +70,9 @@ export default function EditForm({ item, onSave, onCancel }) {
     }));
   };
 
+  const sortedMedication = editedItem.medication.sort((a, b) => a - b);
+  const sortedTime = editedItem.time.sort((a, b) => a - b);
+
   return (
     <Form onSubmit={handleSubmit}>
       <Heading>Bearbeiten</Heading>
@@ -90,7 +93,7 @@ export default function EditForm({ item, onSave, onCancel }) {
             <Button
               key={index}
               selected={
-                editedItem.medication && editedItem.medication.includes(index)
+                editedItem.medication && sortedMedication.includes(index)
               }
               onClick={() => handleSelection("medication", index)}
               type="button"
@@ -107,7 +110,7 @@ export default function EditForm({ item, onSave, onCancel }) {
           {timesOfDay.map((time, index) => (
             <Button
               key={index}
-              selected={editedItem.time && editedItem.time.includes(index)}
+              selected={editedItem.time && sortedTime.includes(index)}
               onClick={() => handleSelection("time", index)}
               type="button"
               aria-label={`Tageszeit: ${time}`}

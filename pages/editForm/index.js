@@ -20,6 +20,8 @@ export default function EditForm({ item, onSave, onCancel }) {
     medicationName: item && item.medicationName ? item.medicationName : "",
   });
 
+  const [imageStatus, setImageStatus] = useState("");
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -59,11 +61,17 @@ export default function EditForm({ item, onSave, onCancel }) {
   };
 
   const handleImageRemove = () => {
+    if (editedItem.image) {
+      setImageStatus("Bild gelöscht");
+    }
     setEditedItem((prevItem) => ({
       ...prevItem,
       image: null,
     }));
   };
+
+  const sortedMedication = editedItem.medication.sort((a, b) => a - b);
+  const sortedTime = editedItem.time.sort((a, b) => a - b);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -85,7 +93,7 @@ export default function EditForm({ item, onSave, onCancel }) {
             <Button
               key={index}
               selected={
-                editedItem.medication && editedItem.medication.includes(index)
+                editedItem.medication && sortedMedication.includes(index)
               }
               onClick={() => handleSelection("medication", index)}
               type="button"
@@ -102,7 +110,7 @@ export default function EditForm({ item, onSave, onCancel }) {
           {timesOfDay.map((time, index) => (
             <Button
               key={index}
-              selected={editedItem.time && editedItem.time.includes(index)}
+              selected={editedItem.time && sortedTime.includes(index)}
               onClick={() => handleSelection("time", index)}
               type="button"
               aria-label={`Tageszeit: ${time}`}
@@ -137,9 +145,12 @@ export default function EditForm({ item, onSave, onCancel }) {
           onChange={handleImageChange}
         />
         {editedItem.image ? <Image src={editedItem.image} alt="Bild" /> : null}
-        <Button type="button" onClick={handleImageRemove}>
-          Bild entfernen
-        </Button>
+        {imageStatus && <StatusText>{imageStatus}</StatusText>}
+        {editedItem.image && (
+          <Button type="button" onClick={handleImageRemove}>
+            Bild entfernen
+          </Button>
+        )}
       </FormGroup>
       <ButtonContainer>
         <SubmitButton type="submit">Speichern</SubmitButton>
@@ -160,17 +171,30 @@ const Button = styled.button`
   border-radius: 4px;
   flex: 0 0 auto;
   margin-bottom: 5px;
+
+  @media (max-width: 375px) {
+    padding: 8px;
+    margin-right: 3px;
+    font-size: 12px;
+  }
 `;
 
 const Form = styled.form`
-  padding: 20px;
+  padding: 5px;
   background-color: #eeeeee;
+
+  @media (max-width: 375px) {
+    padding: 3px;
+  }
 `;
 
 const Heading = styled.h2`
-  font-size: 24px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+
+  @media (max-width: 375px) {
+    font-size: 20px;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -188,7 +212,7 @@ const Input = styled.input`
   border-radius: 4px;
   width: 100%;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const ButtonGroup = styled.div`
@@ -206,6 +230,11 @@ const SubmitButton = styled.button`
   border: none;
   border-radius: 4px;
   margin-right: 10px;
+
+  @media (max-width: 375px) {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
 `;
 
 const CancelButton = styled.button`
@@ -219,7 +248,13 @@ const CancelButton = styled.button`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 `;
 
-const Image = styled.div``;
+const Image = styled.div`
+  max-width: 100%;
+`;
+
+const StatusText = styled.p`
+  margin-top: 10px;
+  font-weight: bold;
+`;

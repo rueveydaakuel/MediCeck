@@ -17,12 +17,12 @@ const ButtonContainer = styled.button`
   border: none;
 `;
 
-const DeleteButtonText = styled.span`
+const DeleteButtonText = styled.button`
   color: white;
   font-size: 16px;
   padding: 8px 16px;
   background-color: #a20a0a;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   width: 100px;
 `;

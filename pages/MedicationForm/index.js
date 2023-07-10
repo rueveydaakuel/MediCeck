@@ -124,15 +124,18 @@ function FormComponent() {
   const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const timesOfDay = ["morgens", "mittags", "abends"];
 
+  const sortedMedication = selectedMedication.sort((a, b) => a - b);
+  const sortedTime = selectedTime.sort((a, b) => a - b);
+
   return (
     <div>
       <QuestionContainer>
-        <h2>Wann wird das Medikament eingenommen?</h2>
+        <h3>Wann wird das Medikament eingenommen?</h3>
         <Container>
           {weekdays.map((medication, index) => (
             <Button
               key={index}
-              selected={selectedMedication.includes(index)}
+              selected={sortedMedication.includes(index)}
               onClick={() => handleMedicationSelection(index)}
             >
               {medication}
@@ -141,12 +144,12 @@ function FormComponent() {
         </Container>
       </QuestionContainer>
       <QuestionContainer>
-        <h2>Zu welcher Tageszeit?</h2>
+        <h3>Zu welcher Tageszeit?</h3>
         <Container>
           {timesOfDay.map((time, index) => (
             <Button
               key={index}
-              selected={selectedTime.includes(index)}
+              selected={sortedTime.includes(index)}
               onClick={() => handleTimeSelection(index)}
             >
               {time}
@@ -155,7 +158,7 @@ function FormComponent() {
         </Container>
       </QuestionContainer>
       <QuestionContainer>
-        <h2>Wie heißt das Medikament?</h2>
+        <h3>Wie heißt das Medikament?</h3>
         <Input
           type="text"
           value={medicationName}
@@ -163,7 +166,7 @@ function FormComponent() {
         />
       </QuestionContainer>
       <QuestionContainer>
-        <h2>Füge ein Bild hinzu (optional)</h2>
+        <h3>Füge ein Bild hinzu (optional)</h3>
         <Input type="file" accept="image/*" onChange={handleImageChange} />
       </QuestionContainer>
       <ButtonContainer>
@@ -199,14 +202,15 @@ const Container = styled.div`
 const Input = styled.input`
   padding: 10px;
   margin: 5px;
-  width: 50%;
-  border-radius: 8px;
+  width: 60%;
+  border-radius: 10px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 20px;
+  padding-bottom: 60px;
 
   button {
     background-color: green;

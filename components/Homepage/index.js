@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router.js";
 import Link from "next/link";
 import HeaderContainer from "../Header/index.js";
+import HomepageIcon from "../HomepageIcon/index.js";
 
 export default function Homepage() {
   const [name, setName] = useState("");
@@ -33,15 +34,20 @@ export default function Homepage() {
       <div>
         <HeaderContainer />
         <main>
-          <div className="question">
-            <p>Für wen möchtest du einen Medikationsplan erstellen?</p>
-            <Input
-              type="text"
-              placeholder="Name:"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
+          <HomepageIconContainer>
+            <HomepageIcon />
+          </HomepageIconContainer>
+          <QuestionContainer>
+            <div className="question">
+              <p>Für wen möchtest du einen Medikationsplan erstellen?</p>
+              <Input
+                type="text"
+                placeholder="Name:"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </div>
+          </QuestionContainer>
           <Button
             disabled={isButtonDeactivated}
             onClick={handleNextButtonClick}
@@ -83,7 +89,18 @@ const MainContainer = styled.div`
 `;
 
 const Input = styled.input`
-  width: 50%;
+  width: 70%;
   padding: 8px;
   font-size: 16px;
+`;
+
+const HomepageIconContainer = styled.div`
+  margin-bottom: 20px;
+  justify-content: center;
+`;
+
+const QuestionContainer = styled.div`
+  margin-right: 30px;
+  padding: 20px;
+  margin-bottom: 70px;
 `;

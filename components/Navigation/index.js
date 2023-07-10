@@ -37,11 +37,11 @@ const Nav = styled.nav`
 `;
 
 const IconLeft = styled.div`
-  margin-right: 50px;
+  margin-right: 60px;
 `;
 
 const IconRight = styled.div`
-  margin-left: 50px;
+  margin-left: 60px;
 `;
 
 const Divider = styled.div`

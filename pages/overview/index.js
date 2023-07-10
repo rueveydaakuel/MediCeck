@@ -118,7 +118,13 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f0ece3;
+  background-color: #f7f1e5;
+
+  @media (max-width: 320px) {
+    padding: 4px;
+    margin: 4px;
+    border-radius: 20px;
+  }
 `;
 
 const EditButton = styled.button`
@@ -128,8 +134,8 @@ const EditButton = styled.button`
   height: 100%;
   background-color: #3a98b9;
   border: none;
-  border-radius: 8px;
-  margin-right: 50px;
+  border-radius: 6px;
+  margin-right: 30px;
   width: 120px;
 `;
 
@@ -158,6 +164,7 @@ const Heading = styled.h2`
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 const ButtonsContainer = styled.div`
@@ -168,7 +175,7 @@ const ButtonsContainer = styled.div`
 `;
 
 const Image = styled.img`
-  max-width: 70%;
+  max-width: 80%;
   margin-bottom: 4px;
   margin-top: 20px;
 `;

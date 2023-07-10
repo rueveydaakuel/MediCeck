@@ -182,7 +182,7 @@ const Button = styled.button`
   padding: 10px;
   margin: 5px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   flex: 0 0 auto;
   margin-bottom: 5px;
@@ -199,8 +199,8 @@ const Container = styled.div`
 const Input = styled.input`
   padding: 10px;
   margin: 5px;
-  width: 50%;
-  border-radius: 8px;
+  width: 60%;
+  border-radius: 10px;
 `;
 
 const ButtonContainer = styled.div`

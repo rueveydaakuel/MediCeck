@@ -168,17 +168,30 @@ const Button = styled.button`
   border-radius: 4px;
   flex: 0 0 auto;
   margin-bottom: 5px;
+
+  @media (max-width: 320px) {
+    padding: 8px;
+    margin-right: 3px;
+    font-size: 12px;
+  }
 `;
 
 const Form = styled.form`
   padding: 5px;
   background-color: #eeeeee;
+
+  @media (max-width: 320px) {
+    padding: 3px;
+  }
 `;
 
 const Heading = styled.h2`
-  font-size: 22px;
   font-weight: bold;
   margin-bottom: 15px;
+
+  @media (max-width: 320px) {
+    font-size: 20px;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -214,6 +227,11 @@ const SubmitButton = styled.button`
   border: none;
   border-radius: 4px;
   margin-right: 10px;
+
+  @media (max-width: 320px) {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
 `;
 
 const CancelButton = styled.button`

@@ -111,7 +111,7 @@ const Container = styled.div`
 
 const Card = styled.div`
   border: 2px solid #e8d5c4;
-  width: 100%;
+  width: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;

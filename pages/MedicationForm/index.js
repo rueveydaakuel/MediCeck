@@ -17,9 +17,7 @@ function FormComponent() {
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("medicationData")) || [];
     setSaveData(savedData);
-  }, []);
 
-  useEffect(() => {
     if (
       selectedMedication.length === 0 ||
       selectedTime.length === 0 ||

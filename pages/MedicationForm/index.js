@@ -12,11 +12,24 @@ function FormComponent() {
   const router = useRouter();
   const { name } = router.query;
   const [selectedImage, setSelectedImage] = useState(null);
+  const [saveButtonColor, setSaveButtonColor] = useState("#E8D5C4");
 
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("medicationData")) || [];
     setSaveData(savedData);
   }, []);
+
+  useEffect(() => {
+    if (
+      selectedMedication.length === 0 ||
+      selectedTime.length === 0 ||
+      medicationName === ""
+    ) {
+      setSaveButtonColor("#CCEEBC");
+    } else {
+      setSaveButtonColor("green");
+    }
+  }, [selectedMedication, selectedTime, medicationName]);
 
   const handleMedicationSelection = (index) => {
     if (!selectedMedication) {
@@ -170,7 +183,12 @@ function FormComponent() {
         <Input type="file" accept="image/*" onChange={handleImageChange} />
       </QuestionContainer>
       <ButtonContainer>
-        <button onClick={handleSave}>Speichern</button>
+        <button
+          onClick={handleSave}
+          style={{ backgroundColor: saveButtonColor }}
+        >
+          Speichern
+        </button>
       </ButtonContainer>
       <Navigation />
     </div>

@@ -4,7 +4,9 @@ import styled from "styled-components";
 const DeleteCard = ({ onDelete }) => {
   return (
     <ButtonContainer>
-      <DeleteButtonText onClick={onDelete}>Löschen</DeleteButtonText>
+      <DeleteButtonText type="button" onClick={onDelete}>
+        Löschen
+      </DeleteButtonText>
     </ButtonContainer>
   );
 };

@@ -9,7 +9,7 @@ I have developed a Medication Planner App using React and Next.js. This app is d
 
 ---
 
-Before we dive into the details, here's a sketch of the MCheck app's user interface:
+Before we dive into the details, here's a sketch of the MediCheck app's user interface:
 
 ![Skizze der MCheck App](./public/ForReadme.png)
 
